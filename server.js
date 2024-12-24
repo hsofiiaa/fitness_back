@@ -16,7 +16,7 @@ const awards = require('./routes/awards');
 
 const app = express();
 
-const allowedOrigins = ['http://localhost:5173', 'https://fitness-app-delta-six.vercel.app'];
+const allowedOrigins = ['http://localhost:5173', 'https://fitness-f.vercel.app'];
 
 const corsOptions = {
   origin: (origin, callback) => {
@@ -27,6 +27,7 @@ const corsOptions = {
     }
   },
   credentials: true,
+  methods: ['GET', 'POST', 'PUT', 'DELETE'],
   allowedHeaders: ['Content-Type', 'Authorization'],
   optionsSuccessStatus: 200,
 };
