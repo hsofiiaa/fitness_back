@@ -6,7 +6,6 @@ const path = require('path');
 const cors = require('cors');
 require('dotenv').config();
 
-
 const globalConfigs = require('./routes/globalConfigs');
 const users = require('./routes/user');
 const posts = require('./routes/post');
@@ -16,7 +15,7 @@ const awards = require('./routes/awards');
 
 const app = express();
 
-const allowedOrigins = ['http://localhost:5173', 'https://fitness-f.vercel.app'];
+const allowedOrigins = ['http://localhost:5173', 'https://fitness-f.vercel.app',  'https://fitness-back-phi.vercel.app'];
 
 const corsOptions = {
   origin: (origin, callback) => {
@@ -31,6 +30,8 @@ const corsOptions = {
   allowedHeaders: ['Content-Type', 'Authorization'],
   optionsSuccessStatus: 200,
 };
+
+app.options('*', cors(corsOptions)); // Дозволяє preflight-запити
 
 app.use(cors(corsOptions));
 
@@ -60,6 +61,9 @@ app.use('/api/posts', posts);
 app.use('/api/comments', comments);
 app.use('/api/awards', awards);
 // app.use('/', mainRoute);
+app.get('/api', (req, res) => {
+  res.status(200).send('Backend is running successfully!');
+});
 
 // Server static assets if in production
 if (process.env.NODE_ENV === 'production') {
@@ -70,6 +74,10 @@ if (process.env.NODE_ENV === 'production') {
     res.sendFile(path.resolve(__dirname, 'client', 'build', 'index.html'));
   });
 }
+
+console.log('MONGO_URI:', process.env.MONGO_URI);
+console.log('NODE_ENV:', process.env.NODE_ENV);
+
 
 const port = process.env.PORT || 4000;
 
