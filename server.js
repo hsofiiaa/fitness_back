@@ -15,7 +15,7 @@ const awards = require('./routes/awards');
 
 const app = express();
 
-const allowedOrigins = ['http://localhost:5173', 'https://fitness-f.vercel.app',  'https://fitnessback-production.up.railway.app'];
+const allowedOrigins = [ 'https://fitness-f.vercel.app',  'https://fitnessback-production.up.railway.app'];
 
 const corsOptions = {
   origin: (origin, callback) => {

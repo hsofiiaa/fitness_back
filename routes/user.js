@@ -22,15 +22,7 @@ router.post("/", createUser);
 // @route   POST /api/users/login
 // @desc    Login user / Returning JWT Token
 // @access  Public
-// router.post("/login", loginUser);
-router.post("/login", async (req, res) => {
-  try {
-    loginUser
-  } catch (error) {
-    console.error('Login error:', error);
-    res.status(500).json({ error: 'Login failed' });
-  }
-});
+router.post("/login", loginUser);
 
 // @route   PUT /api/users
 // @desc    Return current user
