@@ -15,25 +15,37 @@ const awards = require('./routes/awards');
 
 const app = express();
 
-const allowedOrigins = [ 'https://fitness-f.vercel.app',  'https://fitnessback-production.up.railway.app'];
+// const allowedOrigins = [ 'https://fitness-f.vercel.app',  'https://fitnessback-production.up.railway.app'];
+//
+// const corsOptions = {
+//   origin: (origin, callback) => {
+//     if (!origin || allowedOrigins.includes(origin)) {
+//       callback(null, true);
+//     } else {
+//       callback(new Error('Not allowed by CORS'));
+//     }
+//   },
+//   credentials: true, // Дозволяє cookie/авторизаційні заголовки
+//   methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
+//   allowedHeaders: ['Content-Type', 'Authorization'], // Заголовки
+//   optionsSuccessStatus: 200, // Для preflight
+// };
+//
+// app.use(cors(corsOptions));
+//
+// app.options('*', cors(corsOptions));
 
 const corsOptions = {
-  origin: (origin, callback) => {
-    if (!origin || allowedOrigins.includes(origin)) {
-      callback(null, true);
-    } else {
-      callback(new Error('Not allowed by CORS'));
-    }
-  },
-  credentials: true, // Дозволяє cookie/авторизаційні заголовки
+  origin: true, // Тимчасово дозволяємо всі origins для тестування
+  credentials: true,
   methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
-  allowedHeaders: ['Content-Type', 'Authorization'], // Заголовки
-  optionsSuccessStatus: 200, // Для preflight
+  allowedHeaders: ['Content-Type', 'Authorization', 'Accept'],
+  exposedHeaders: ['Authorization'],
+  preflightContinue: false,
+  optionsSuccessStatus: 204
 };
 
 app.use(cors(corsOptions));
-
-app.options('*', cors(corsOptions));
 
 // Body parser middleware
 app.use(bodyParser.urlencoded({ extended: false }));
