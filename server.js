@@ -15,7 +15,7 @@ const awards = require('./routes/awards');
 
 const app = express();
 
-const allowedOrigins = ['http://localhost:5173', 'https://fitness-f.vercel.app',  'https://fitness-back-phi.vercel.app'];
+const allowedOrigins = ['http://localhost:5173', 'https://fitness-f.vercel.app/',  'https://fitnessback-production.up.railway.app'];
 
 const corsOptions = {
   origin: (origin, callback) => {
@@ -64,16 +64,6 @@ app.use('/api/awards', awards);
 app.get('/api', (req, res) => {
   res.status(200).send('Backend is running successfully!');
 });
-
-// Server static assets if in production
-if (process.env.NODE_ENV === 'production') {
-  // Set static folder
-  app.use(express.static('client/build'));
-
-  app.get('*', (req, res) => {
-    res.sendFile(path.resolve(__dirname, 'client', 'build', 'index.html'));
-  });
-}
 
 console.log('MONGO_URI:', process.env.MONGO_URI);
 console.log('NODE_ENV:', process.env.NODE_ENV);
